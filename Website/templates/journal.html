@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block title %}Blog Feed{% endblock %}
+
+{% block content %}
+<h3 align="center">{% block header %} Private journal {% endblock %}</h3>
+
+<div id="posts">
+    {% for journal in journals %}
+    <div class="card board-dark">
+        <div class="card-header d-flex justify-content-between align-iterms-center" >
+            <a href="#">{{current_user.username}}</a>
+            {% if current_user.id == journal.author %}
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-primary dropdown-toggle"data-bs-toggle="dropdown">   
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="/delete-journal/{{journal.id}}" class="dropdown-item">Delete</a></li>
+                    <li><a href="/post/edit/{{journal.id}}" class="dropdown-item">Edit</a></li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            {% if journal.image_name %}
+            <img src="{{ url_for('static', filename='images/' + journal.image_name)}}" width="320">
+            {% endif %}
+
+            {% if journal.video_name %}
+            <video width="320" height="240" controls>
+                <source src="{{ url_for('static', filename='video/' + journal.video_name)}}" type="video/mp4">
+            </video>
+            {% endif %}
+
+            {% if journal.audio_name %}
+            <audio controls="controls" src="{{ url_for('static', filename='audio/' + journal.audio_name)}}"></audio>
+            {% endif %}
+            <div class="card-text">{{journal.text}}</div>
+        </div>
+        <div class="card-footer text-muted">{{journal.date_created}}</div>
+    </div>
+    <br/> 
+    {% endfor %}
+</div>
+<br/>
+{% block script %} {% endblock %}
+{% block footer %}
+<div align="center">
+    <a href="/CreateJournal"
+    ><button type="button" class="btn btn-primary btn-lg">
+        Create a new journal
+    </button></a>
+</div>
+<br/>
+<div align="center">
+    <a href="/posts/{{current_user.username}}"
+    ><button type="button" class="btn btn-secondary btn-lg">
+        Back
+    </button></a>
+</div>
+{% endblock %} {% endblock %}

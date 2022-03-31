@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+{{ current_user.id }}
+
+<h2 align="center">Update your profile</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    {{ form.username.label(
+        class="form-label") }}
+    {{ form.username(
+        class="form-control") }}
+    <br/>
+    {{ form.email.label(
+        class="form-label") }}
+    {{ form.email(
+        class="form-control") }}
+    <br/>
+    {{ form.profile_picture.label(
+        class="form-label") }}
+    {{ form.profile_picture(
+        class="form-control") }}
+    <br/>
+    {{ form.update_field(
+        class="btn btn-primary") }}
+</form>
+
+
+{% endblock %}

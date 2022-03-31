@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %}Post edit{% endblock %}
+{% block content %}
+<h3 align="center" >Edit your post</h3>
+
+<form method='POST' enctype='multipart/form-data'>
+    <textarea name="text" id="text" class="form-control"></textarea>
+    <br/>
+    <br/>
+    <div align="center">
+        <button type="submit" class="btn btn-lg btn-primary">Update</button>
+    </div>  
+</form>
+<br/>
+    <div align="center">
+        <a href="/home"><button type="button" class="btn btn-lg btn-secondary">Back</button></a>
+    </div>
+{% endblock %}
